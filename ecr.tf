@@ -1,5 +1,5 @@
 locals {
-  principal_arns = [for account_and_profile in var.aws_account_and_profiles : "arn:aws:iam::${account_and_profile.account_id}:root"]
+  principal_arns = [for account_and_policy in var.aws_account_ids_and_policies : "arn:aws:iam::${account_and_policy.account_id}:root"]
 }
 
 module "ecr" {
@@ -13,6 +13,6 @@ module "ecr" {
   principals_readonly_access = local.principal_arns
 
   providers = {
-    aws = aws.production
+    aws = aws.production_environment_provider
   }
 }
