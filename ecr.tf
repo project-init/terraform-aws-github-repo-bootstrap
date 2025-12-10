@@ -13,6 +13,6 @@ module "ecr" {
   principals_readonly_access = local.principal_arns
 
   providers = {
-    aws = aws.provider1
+    aws = aws.production_environment_provider
   }
 }
