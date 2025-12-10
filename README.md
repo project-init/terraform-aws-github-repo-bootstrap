@@ -22,16 +22,16 @@ Check our [Examples](examples) for full usage information.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.8.0 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 6.6.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.25.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.9.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.production_environment_provider"></a> [aws.production\_environment\_provider](#provider\_aws.production\_environment\_provider) | ~> 6.8.0 |
-| <a name="provider_aws.test_environment_provider"></a> [aws.test\_environment\_provider](#provider\_aws.test\_environment\_provider) | ~> 6.8.0 |
-| <a name="provider_github"></a> [github](#provider\_github) | 6.6.0 |
+| <a name="provider_aws.production_environment_provider"></a> [aws.production\_environment\_provider](#provider\_aws.production\_environment\_provider) | ~> 6.25.0 |
+| <a name="provider_aws.test_environment_provider"></a> [aws.test\_environment\_provider](#provider\_aws.test\_environment\_provider) | ~> 6.25.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 6.9.0 |
 
 ## Modules
 
@@ -50,7 +50,7 @@ Check our [Examples](examples) for full usage information.
 | [aws_iam_role.github_ecr_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.github_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.github_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [github_repository_ruleset.default](https://registry.terraform.io/providers/integrations/github/6.6.0/docs/resources/repository_ruleset) | resource |
+| [github_repository_ruleset.default](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_ruleset) | resource |
 | [aws_iam_openid_connect_provider.github_oidc_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 | [aws_iam_openid_connect_provider.github_oidc_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 

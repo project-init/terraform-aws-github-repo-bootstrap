@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.8.0"
+      version = "~> 6.25.0"
       configuration_aliases = [
         aws.production_environment_provider,
         aws.test_environment_provider,
@@ -12,7 +12,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "6.6.0"
+      version = "~> 6.9.0"
     }
   }
 }
