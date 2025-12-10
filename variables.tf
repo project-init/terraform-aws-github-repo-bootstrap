@@ -14,9 +14,9 @@ variable "service_name" {
 }
 
 variable "ecr_repos" {
-  type        = list(string)
+  type        = set(string)
   default     = []
-  description = "The list of ecr repos (i.e. service types) to create."
+  description = "The set of ecr repos (i.e. service types) to create."
 }
 
 variable "repo" {
