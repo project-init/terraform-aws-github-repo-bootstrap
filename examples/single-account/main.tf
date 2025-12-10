@@ -24,11 +24,11 @@ module "bootstrap" {
       policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
     },
   ]
-  repo         = "data-platform"
-  service_name = "data-platform"
+  repo         = "repo-name"
+  service_name = "service-name"
   ecr_repos = toset([
     "api",
-    "migration"
+    "worker"
   ])
 
   required_checks = [
