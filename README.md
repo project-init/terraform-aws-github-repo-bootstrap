@@ -29,8 +29,8 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.provider1"></a> [aws.provider1](#provider\_aws.provider1) | ~> 6.8.0 |
-| <a name="provider_aws.provider2"></a> [aws.provider2](#provider\_aws.provider2) | ~> 6.8.0 |
+| <a name="provider_aws.production_environment_provider"></a> [aws.production\_environment\_provider](#provider\_aws.production\_environment\_provider) | ~> 6.8.0 |
+| <a name="provider_aws.test_environment_provider"></a> [aws.test\_environment\_provider](#provider\_aws.test\_environment\_provider) | ~> 6.8.0 |
 | <a name="provider_github"></a> [github](#provider\_github) | 6.6.0 |
 
 ## Modules
@@ -46,20 +46,20 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Type |
 |------|------|
-| [aws_iam_role.github_ecr_provider1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role.github_ecr_provider2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.github_provider1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.github_provider2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role.github_ecr_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.github_ecr_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.github_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.github_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [github_repository_ruleset.default](https://registry.terraform.io/providers/integrations/github/6.6.0/docs/resources/repository_ruleset) | resource |
-| [aws_iam_openid_connect_provider.github_oidc_provider1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
-| [aws_iam_openid_connect_provider.github_oidc_provider2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_openid_connect_provider.github_oidc_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_openid_connect_provider.github_oidc_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_account_ids_and_policies"></a> [aws\_account\_ids\_and\_policies](#input\_aws\_account\_ids\_and\_policies) | The AWS Account IDs to give access to with the given policy. | <pre>list(object({<br/>    account_id = string<br/>    policy_arn = string<br/>  }))</pre> | `[]` | no |
-| <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The list of ecr repos (i.e. service types) to create. | `list(string)` | `[]` | no |
+| <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The set of ecr repos (i.e. service types) to create. | `set(string)` | `[]` | no |
 | <a name="input_repo"></a> [repo](#input\_repo) | The name of the repo using this module. | `string` | n/a | yes |
 | <a name="input_required_checks"></a> [required\_checks](#input\_required\_checks) | A list of required checks that a PR has to pass before being eligible for merge. | <pre>list(object({<br/>    context        = string<br/>    integration_id = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service. | `string` | n/a | yes |

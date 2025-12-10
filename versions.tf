@@ -6,8 +6,8 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.8.0"
       configuration_aliases = [
-        aws.provider1,
-        aws.provider2,
+        aws.production_environment_provider,
+        aws.test_environment_provider,
       ]
     }
     github = {
