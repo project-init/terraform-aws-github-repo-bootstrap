@@ -3,14 +3,14 @@
 /////////////////////////////////////////////////////////////
 
 data "aws_iam_openid_connect_provider" "github_oidc_provider1" {
-  count    = len(var.aws_account_ids_and_policies) > 0 ? 1 : 0
+  count    = length(var.aws_account_ids_and_policies) > 0 ? 1 : 0
   provider = aws.provider1
 
   arn = "arn:aws:iam::${var.aws_account_ids_and_policies[0].account_id}:oidc-provider/token.actions.githubusercontent.com"
 }
 
 resource "aws_iam_role" "github_ecr_provider1" {
-  count = len(var.aws_account_ids_and_policies) > 0 ? 1 : 0
+  count = length(var.aws_account_ids_and_policies) > 0 ? 1 : 0
 
   name     = module.github_role_label.id
   provider = aws.provider1
@@ -35,7 +35,7 @@ resource "aws_iam_role" "github_ecr_provider1" {
 }
 
 resource "aws_iam_role_policy_attachment" "github_provider1" {
-  count = len(var.aws_account_ids_and_policies) > 0 ? 1 : 0
+  count = length(var.aws_account_ids_and_policies) > 0 ? 1 : 0
 
   provider = aws.provider1
 
@@ -48,14 +48,14 @@ resource "aws_iam_role_policy_attachment" "github_provider1" {
 /////////////////////////////////////////////////////////////
 
 data "aws_iam_openid_connect_provider" "github_oidc_provider2" {
-  count    = len(var.aws_account_ids_and_policies) > 1 ? 1 : 0
+  count    = length(var.aws_account_ids_and_policies) > 1 ? 1 : 0
   provider = aws.provider2
 
   arn = "arn:aws:iam::${var.aws_account_ids_and_policies[1].account_id}:oidc-provider/token.actions.githubusercontent.com"
 }
 
 resource "aws_iam_role" "github_ecr_provider2" {
-  count = len(var.aws_account_ids_and_policies) > 1 ? 1 : 0
+  count = length(var.aws_account_ids_and_policies) > 1 ? 1 : 0
 
   name     = module.github_role_label.id
   provider = aws.provider2
@@ -80,7 +80,7 @@ resource "aws_iam_role" "github_ecr_provider2" {
 }
 
 resource "aws_iam_role_policy_attachment" "github_provider2" {
-  count = len(var.aws_account_ids_and_policies) > 1 ? 1 : 0
+  count = length(var.aws_account_ids_and_policies) > 1 ? 1 : 0
 
   provider = aws.provider2
 
