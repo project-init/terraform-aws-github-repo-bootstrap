@@ -19,6 +19,12 @@ variable "ecr_repos" {
   description = "The set of ecr repos (i.e. service types) to create."
 }
 
+variable "organization" {
+  type        = string
+  nullable    = false
+  description = "The name of the organization the repo exists in."
+}
+
 variable "repo" {
   type        = string
   nullable    = false

@@ -24,6 +24,7 @@ module "bootstrap" {
       policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
     },
   ]
+  organization = "your-organization"
   repo         = "repo-name"
   service_name = "service-name"
   ecr_repos = toset([
