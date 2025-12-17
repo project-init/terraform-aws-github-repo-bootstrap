@@ -60,6 +60,7 @@ Check our [Examples](examples) for full usage information.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_account_ids_and_policies"></a> [aws\_account\_ids\_and\_policies](#input\_aws\_account\_ids\_and\_policies) | The AWS Account IDs to give access to with the given policy. | <pre>list(object({<br/>    account_id = string<br/>    policy_arn = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The set of ecr repos (i.e. service types) to create. | `set(string)` | `[]` | no |
+| <a name="input_organization"></a> [organization](#input\_organization) | The name of the organization the repo exists in. | `string` | n/a | yes |
 | <a name="input_repo"></a> [repo](#input\_repo) | The name of the repo using this module. | `string` | n/a | yes |
 | <a name="input_required_checks"></a> [required\_checks](#input\_required\_checks) | A list of required checks that a PR has to pass before being eligible for merge. | <pre>list(object({<br/>    context        = string<br/>    integration_id = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service. | `string` | n/a | yes |

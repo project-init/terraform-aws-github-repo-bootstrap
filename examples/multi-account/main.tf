@@ -42,6 +42,7 @@ module "bootstrap" {
       policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
     }
   ]
+  organization = "your-organization"
   repo         = "data-platform"
   service_name = "data-platform"
   ecr_repos = toset([

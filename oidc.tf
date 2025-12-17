@@ -26,7 +26,7 @@ resource "aws_iam_role" "github_ecr_production_environment_provider" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:project-init/${var.repo}:*"
+            "token.actions.githubusercontent.com:sub" = "repo:${var.organization}/${var.repo}:*"
           }
         }
       }
@@ -71,7 +71,7 @@ resource "aws_iam_role" "github_ecr_test_environment_provider" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:project-init/${var.repo}:*"
+            "token.actions.githubusercontent.com:sub" = "repo:${var.organization}/${var.repo}:*"
           }
         }
       }
