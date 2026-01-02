@@ -12,7 +12,7 @@ module "ecr_label" {
   version = "~> 0.25.0"
 
   attributes = concat([each.value.namespace], ["${var.service_name}-${each.key}"])
-  delimiter = "/"
+  delimiter  = "/"
 }
 
 module "github_role_label" {
