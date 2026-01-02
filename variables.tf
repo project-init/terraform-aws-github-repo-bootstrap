@@ -1,5 +1,8 @@
-variable "aws_account_ids" {
-  type = list(string)
+variable "aws_account_ids_and_policies" {
+  type = list(object({
+    account_id = string
+    policy_arn = string
+  }))
   default     = []
   nullable    = false
   description = "The AWS Account IDs to give access to with the given policy."

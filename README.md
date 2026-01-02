@@ -29,6 +29,7 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Version |
 |------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 6.25.0 |
 | <a name="provider_aws.production_environment_provider"></a> [aws.production\_environment\_provider](#provider\_aws.production\_environment\_provider) | ~> 6.25.0 |
 | <a name="provider_aws.test_environment_provider"></a> [aws.test\_environment\_provider](#provider\_aws.test\_environment\_provider) | ~> 6.25.0 |
 | <a name="provider_github"></a> [github](#provider\_github) | ~> 6.9.0 |
@@ -37,8 +38,6 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | cloudposse/ecr/aws | v1.0.0 |
-| <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | cloudposse/label/null | ~> 0.25.0 |
 | <a name="module_github_role_label"></a> [github\_role\_label](#module\_github\_role\_label) | cloudposse/label/null | ~> 0.25.0 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 
@@ -46,6 +45,9 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Type |
 |------|------|
+| [aws_ecr_lifecycle_policy.ecr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy) | resource |
+| [aws_ecr_repository.ecr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository) | resource |
+| [aws_ecr_repository_policy.ecr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy) | resource |
 | [aws_iam_role.github_ecr_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.github_ecr_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.github_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -53,13 +55,15 @@ Check our [Examples](examples) for full usage information.
 | [github_repository_ruleset.default](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_ruleset) | resource |
 | [aws_iam_openid_connect_provider.github_oidc_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 | [aws_iam_openid_connect_provider.github_oidc_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_policy_document.ecr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_account_ids_and_policies"></a> [aws\_account\_ids\_and\_policies](#input\_aws\_account\_ids\_and\_policies) | The AWS Account IDs to give access to with the given policy. | <pre>list(object({<br/>    account_id = string<br/>    policy_arn = string<br/>  }))</pre> | `[]` | no |
-| <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The set of ecr repos (i.e. service types) and namespaces (i.e. release/dev) to create. | <pre>set(object({<br/>    name      = string<br/>    namespace = optional(string, "")<br/>  }))</pre> | `[]` | no |
+| <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The set of ecr repos (i.e. service types) and namespaces (i.e. release/dev) to create. | <pre>list(object({<br/>    name      = string<br/>    namespace = optional(string, "")<br/>  }))</pre> | `[]` | no |
+| <a name="input_image_tag_mutability"></a> [image\_tag\_mutability](#input\_image\_tag\_mutability) | Whether to have the repository as immutable by tag. | `bool` | `false` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | The name of the organization the repo exists in. | `string` | n/a | yes |
 | <a name="input_repo"></a> [repo](#input\_repo) | The name of the repo using this module. | `string` | n/a | yes |
 | <a name="input_required_checks"></a> [required\_checks](#input\_required\_checks) | A list of required checks that a PR has to pass before being eligible for merge. | <pre>list(object({<br/>    context        = string<br/>    integration_id = number<br/>  }))</pre> | `[]` | no |

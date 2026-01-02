@@ -67,7 +67,7 @@ resource "aws_ecr_repository_policy" "ecr" {
   for_each = local.ecr_map
 
   repository = aws_ecr_repository.ecr[each.key]
-  policy = data.aws_iam_policy_document.ecr.json
+  policy     = data.aws_iam_policy_document.ecr.json
 }
 
 data "aws_iam_policy_document" "ecr" {
@@ -77,7 +77,7 @@ data "aws_iam_policy_document" "ecr" {
 
     principals {
       type        = "AWS"
-      identifiers = var.aws_account_ids
+      identifiers = [for account_and_policy in var.aws_account_ids_and_policies : account_and_policy.account_id]
     }
 
     actions = [
