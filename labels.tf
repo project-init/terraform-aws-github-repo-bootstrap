@@ -12,7 +12,7 @@ module "ecr_label" {
   version = "~> 0.25.0"
 
   context    = module.label.context
-  attributes = concat(module.label.attributes, [each.key])
+  attributes = concat([each.value.namespace], module.label.attributes, [each.value.name])
 }
 
 module "github_role_label" {
