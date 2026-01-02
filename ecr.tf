@@ -4,20 +4,22 @@ locals {
 
 resource "aws_ecr_repository" "ecr" {
   for_each = local.ecr_map
-  provider = aws.production_environment_provider
 
   name                 = each.value.namespace == "" ? "${var.service_name}-${each.key}" : "${each.value.namespace}/${var.service_name}-${each.key}"
   image_tag_mutability = each.value.image_tag_mutability
   force_delete         = false
+
   image_scanning_configuration {
     scan_on_push = true
   }
-  region = var.region
+
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
 }
 
 resource "aws_ecr_lifecycle_policy" "ecr" {
   for_each = local.ecr_map
-  provider = aws.production_environment_provider
 
   repository = aws_ecr_repository.ecr[each.key].name
   policy     = <<EOF
@@ -54,7 +56,6 @@ EOF
 
 resource "aws_ecr_repository_policy" "ecr" {
   for_each = local.ecr_map
-  provider = aws.production_environment_provider
 
   repository = aws_ecr_repository.ecr[each.key].name
   policy     = data.aws_iam_policy_document.ecr.json

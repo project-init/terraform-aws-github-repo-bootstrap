@@ -29,12 +29,6 @@ variable "organization" {
   description = "The name of the organization the repo exists in."
 }
 
-variable "region" {
-  default = "us-east-1"
-  type = string
-  description = "The region to deploy the ecr repos."
-}
-
 variable "repo" {
   type        = string
   nullable    = false
