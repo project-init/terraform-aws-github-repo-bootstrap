@@ -11,18 +11,7 @@ module "ecr_label" {
   source  = "cloudposse/label/null"
   version = "~> 0.25.0"
 
-  context    = module.label.context
-  attributes = concat(module.label.attributes, [each.key])
-}
-
-module "namespaced_ecr_label" {
-  for_each = local.ecr_map
-
-  source  = "cloudposse/label/null"
-  version = "~> 0.25.0"
-
-  context    = module.label.context
-  attributes = concat([each.value.namespace], module.ecr_label[each.key].attributes)
+  attributes = concat([each.value.namespace], ["${var.service_name}-${each.key}"])
   delimiter = "/"
 }
 
