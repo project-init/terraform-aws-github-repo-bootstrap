@@ -18,7 +18,7 @@ resource "aws_ecr_lifecycle_policy" "ecr" {
   for_each = local.ecr_map
   provider = aws.production_environment_provider
 
-  repository = aws_ecr_repository.ecr[each.key]
+  repository = aws_ecr_repository.ecr[each.key].name
   policy     = <<EOF
 {
     "rules": [
@@ -55,7 +55,7 @@ resource "aws_ecr_repository_policy" "ecr" {
   for_each = local.ecr_map
   provider = aws.production_environment_provider
 
-  repository = aws_ecr_repository.ecr[each.key]
+  repository = aws_ecr_repository.ecr[each.key].name
   policy     = data.aws_iam_policy_document.ecr.json
 }
 
