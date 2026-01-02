@@ -1,19 +1,97 @@
 locals {
   principal_arns = [for account_and_policy in var.aws_account_ids_and_policies : "arn:aws:iam::${account_and_policy.account_id}:root"]
-  ecr_map = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => ecr_repo })
+  ecr_map        = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => ecr_repo })
 }
 
-module "ecr" {
+variable "image_tag_mutability" {
+  default     = false
+  type        = bool
+  description = "Whether to have the repository as immutable by tag."
+}
+
+resource "aws_ecr_repository" "ecr" {
   for_each = local.ecr_map
 
-  source          = "cloudposse/ecr/aws"
-  version         = "v1.0.0"
-  max_image_count = 50
-  name            = each.value.namespace == "" ? module.ecr_label[each.key].id : "${each.value.namespace}//${module.ecr_label[each.key].id}"
-
-  principals_readonly_access = local.principal_arns
+  name                 = each.value.namespace == "" ? "${var.service_name}-${each.key}" : "${each.value.namespace}/${var.service_name}-${each.key}"
+  image_tag_mutability = var.image_tag_mutability
+  force_delete         = false
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 
   providers = {
     aws = aws.production_environment_provider
+  }
+}
+
+resource "aws_ecr_lifecycle_policy" "ecr" {
+  for_each = local.ecr_map
+
+  repository = aws_ecr_repository.ecr[each.key]
+  policy     = <<EOF
+{
+    "rules": [
+        {
+            "action": {
+                "type": "expire"
+            },
+            "description": "Remove untagged images",
+            "rulePriority": 1,
+            "selection": {
+                "tagStatus": "untagged",
+                "countType": "imageCountMoreThan",
+                "countNumber": 1
+            },
+        }
+        {
+            "action": {
+                "type": "expire"
+            },
+            "description": "Rotate images when reach 50 images stored",
+            "rulePriority": 2,
+            "selection": {
+                "tagStatus": "any",
+                "countType": "imageCountMoreThan",
+                "countNumber": 50
+            },
+        }
+    ]
+}
+EOF
+  providers = {
+    aws = aws.production_environment_provider
+  }
+}
+
+resource "aws_ecr_repository_policy" "ecr" {
+  for_each = local.ecr_map
+
+  repository = aws_ecr_repository.ecr[each.key]
+  policy = data.aws_iam_policy_document.ecr.json
+}
+
+data "aws_iam_policy_document" "ecr" {
+  statement {
+    sid    = "ReadonlyAccess"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = var.aws_account_ids
+    }
+
+    actions = [
+      "ecr:ListTagsForResource",
+      "ecr:ListImages",
+      "ecr:GetRepositoryPolicy",
+      "ecr:GetLifecyclePolicyPreview",
+      "ecr:GetLifecyclePolicy",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:DescribeRepositories",
+      "ecr:DescribeImages",
+      "ecr:DescribeImageScanFindings",
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability",
+    ]
   }
 }
