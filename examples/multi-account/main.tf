@@ -45,10 +45,19 @@ module "bootstrap" {
   organization = "your-organization"
   repo         = "data-platform"
   service_name = "data-platform"
-  ecr_repos = toset([
-    "api",
-    "migration"
-  ])
+  ecr_repos = [
+    {
+      name      = "api",
+      namespace = "release"
+    },
+    {
+      name      = "api",
+      namespace = "development"
+    },
+    {
+      name = "worker"
+    },
+  ]
 
   required_checks = [
     {

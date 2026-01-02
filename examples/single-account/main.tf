@@ -27,10 +27,19 @@ module "bootstrap" {
   organization = "your-organization"
   repo         = "repo-name"
   service_name = "service-name"
-  ecr_repos = toset([
-    "api",
-    "worker"
-  ])
+  ecr_repos = [
+    {
+      name      = "api",
+      namespace = "release"
+    },
+    {
+      name      = "api",
+      namespace = "development"
+    },
+    {
+      name = "worker"
+    },
+  ]
 
   required_checks = [
     {
