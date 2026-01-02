@@ -40,7 +40,7 @@ resource "aws_ecr_lifecycle_policy" "ecr" {
                 "countType": "imageCountMoreThan",
                 "countNumber": 1
             },
-        }
+        },
         {
             "action": {
                 "type": "expire"
