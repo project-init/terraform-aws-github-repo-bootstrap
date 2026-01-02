@@ -39,7 +39,7 @@ resource "aws_ecr_lifecycle_policy" "ecr" {
                 "tagStatus": "untagged",
                 "countType": "imageCountMoreThan",
                 "countNumber": 1
-            },
+            }
         },
         {
             "action": {
@@ -51,7 +51,7 @@ resource "aws_ecr_lifecycle_policy" "ecr" {
                 "tagStatus": "any",
                 "countType": "imageCountMoreThan",
                 "countNumber": 50
-            },
+            }
         }
     ]
 }
