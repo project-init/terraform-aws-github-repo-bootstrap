@@ -11,6 +11,7 @@ variable "image_tag_mutability" {
 
 resource "aws_ecr_repository" "ecr" {
   for_each = local.ecr_map
+  provider = aws.production_environment_provider
 
   name                 = each.value.namespace == "" ? "${var.service_name}-${each.key}" : "${each.value.namespace}/${var.service_name}-${each.key}"
   image_tag_mutability = var.image_tag_mutability
@@ -18,14 +19,11 @@ resource "aws_ecr_repository" "ecr" {
   image_scanning_configuration {
     scan_on_push = true
   }
-
-  providers = {
-    aws = aws.production_environment_provider
-  }
 }
 
 resource "aws_ecr_lifecycle_policy" "ecr" {
   for_each = local.ecr_map
+  provider = aws.production_environment_provider
 
   repository = aws_ecr_repository.ecr[each.key]
   policy     = <<EOF
@@ -58,13 +56,11 @@ resource "aws_ecr_lifecycle_policy" "ecr" {
     ]
 }
 EOF
-  providers = {
-    aws = aws.production_environment_provider
-  }
 }
 
 resource "aws_ecr_repository_policy" "ecr" {
   for_each = local.ecr_map
+  provider = aws.production_environment_provider
 
   repository = aws_ecr_repository.ecr[each.key]
   policy     = data.aws_iam_policy_document.ecr.json
