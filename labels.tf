@@ -6,13 +6,13 @@ module "label" {
 }
 
 module "ecr_label" {
-  for_each = var.ecr_repos
+  for_each = local.ecr_map
 
   source  = "cloudposse/label/null"
   version = "~> 0.25.0"
 
   context    = module.label.context
-  attributes = concat([each.value.namespace], module.label.attributes, [each.value.name])
+  attributes = concat([each.value.namespace], module.label.attributes, [each.key])
 }
 
 module "github_role_label" {

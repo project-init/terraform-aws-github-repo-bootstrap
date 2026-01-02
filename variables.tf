@@ -14,7 +14,7 @@ variable "service_name" {
 }
 
 variable "ecr_repos" {
-  type = set(object({
+  type = list(object({
     name      = string
     namespace = optional(string, "")
   }))
