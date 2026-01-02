@@ -9,7 +9,7 @@ module "ecr" {
   source          = "cloudposse/ecr/aws"
   version         = "v1.0.0"
   max_image_count = 50
-  name            = each.value.namespace == "" ? module.ecr_label[each.key].id : "${each.value.namespace}/${module.ecr_label[each.key].id}"
+  name            = each.value.namespace == "" ? module.ecr_label[each.key].id : "${each.value.namespace}//${module.ecr_label[each.key].id}"
 
   principals_readonly_access = local.principal_arns
 
