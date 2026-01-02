@@ -12,6 +12,7 @@ resource "aws_ecr_repository" "ecr" {
   image_scanning_configuration {
     scan_on_push = true
   }
+  region = var.region
 }
 
 resource "aws_ecr_lifecycle_policy" "ecr" {
