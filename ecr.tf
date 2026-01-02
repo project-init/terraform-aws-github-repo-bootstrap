@@ -1,6 +1,6 @@
 locals {
   principal_arns = [for account_and_policy in var.aws_account_ids_and_policies : "arn:aws:iam::${account_and_policy.account_id}:root"]
-  ecr_map = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => t })
+  ecr_map = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => ecr_repo })
 }
 
 module "ecr" {
