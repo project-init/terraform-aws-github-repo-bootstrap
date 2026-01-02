@@ -1,12 +1,5 @@
 locals {
-  principal_arns = [for account_and_policy in var.aws_account_ids_and_policies : "arn:aws:iam::${account_and_policy.account_id}:root"]
-  ecr_map        = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => ecr_repo })
-}
-
-variable "image_tag_mutability" {
-  default     = false
-  type        = bool
-  description = "Whether to have the repository as immutable by tag."
+  ecr_map = tomap({ for ecr_repo in var.ecr_repos : ecr_repo.name => ecr_repo })
 }
 
 resource "aws_ecr_repository" "ecr" {
@@ -14,7 +7,7 @@ resource "aws_ecr_repository" "ecr" {
   provider = aws.production_environment_provider
 
   name                 = each.value.namespace == "" ? "${var.service_name}-${each.key}" : "${each.value.namespace}/${var.service_name}-${each.key}"
-  image_tag_mutability = var.image_tag_mutability
+  image_tag_mutability = each.value.image_tag_mutability
   force_delete         = false
   image_scanning_configuration {
     scan_on_push = true

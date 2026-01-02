@@ -15,8 +15,9 @@ variable "service_name" {
 
 variable "ecr_repos" {
   type = list(object({
-    name      = string
-    namespace = optional(string, "")
+    name                 = string
+    namespace            = optional(string, "")
+    image_tag_mutability = optional(string, "IMMUTABLE")
   }))
   default     = []
   description = "The set of ecr repos (i.e. service types) and namespaces (i.e. release/dev) to create."
