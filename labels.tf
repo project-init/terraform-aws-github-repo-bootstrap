@@ -22,7 +22,7 @@ module "namespaced_ecr_label" {
   version = "~> 0.25.0"
 
   context    = module.label.context
-  attributes = concat([each.value.namespace], module.ecr_label.attributes)
+  attributes = concat([each.value.namespace], module.ecr_label[each.key].attributes)
   delimiter = "/"
 }
 
