@@ -11,7 +11,7 @@ module "ecr_label" {
   source  = "cloudposse/label/null"
   version = "~> 0.25.0"
 
-  attributes = concat([each.value.namespace], ["${var.service_name}-${each.key}"])
+  attributes = concat([each.value.namespace], ["${var.service_name}-${each.value.name}"])
   delimiter  = "/"
 }
 
