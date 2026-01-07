@@ -1,4 +1,6 @@
 resource "github_repository_ruleset" "default" {
+  count = var.create_default_repo_ruleset ? 1 : 0
+
   name        = "default"
   repository  = var.repo
   target      = "branch"
