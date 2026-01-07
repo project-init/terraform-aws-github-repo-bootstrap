@@ -25,9 +25,9 @@ variable "repo" {
 
 variable "ecr_repos" {
   type = list(object({
-    name                    = string
-    namespace               = optional(string, "")
-    immage_tag_immutability = optional(string, "IMMUTABLE")
+    name                 = string
+    namespace            = optional(string, "")
+    image_tag_mutability = optional(string, "IMMUTABLE")
     image_tag_mutability_exclusion_filter = optional(list(object({
       filter      = string
       filter_type = optional(string, "WILDCARD")
