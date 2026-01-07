@@ -13,7 +13,7 @@ module "ecr" {
 
   principals_readonly_access = local.principal_arns
 
-  image_tag_mutability                  = each.value.image_tag_mutability
+  image_tag_mutability                  = each.value # each.value.image_tag_mutability
   image_tag_mutability_exclusion_filter = each.value.image_tag_mutability_exclusion_filter
 
   providers = {
