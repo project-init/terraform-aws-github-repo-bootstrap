@@ -28,10 +28,10 @@ variable "ecr_repos" {
     name                    = string
     namespace               = optional(string, "")
     immage_tag_immutability = optional(string, "IMMUTABLE")
-    image_tag_mutability_exclusion_filter = object({
+    image_tag_mutability_exclusion_filter = optional(list(object({
       filter      = string
       filter_type = optional(string, "WILDCARD")
-    })
+    })), [])
   }))
   default     = []
   description = "The set of ecr repos (i.e. service types) and namespaces (i.e. release/dev) to create."
