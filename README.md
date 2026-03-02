@@ -37,7 +37,7 @@ Check our [Examples](examples) for full usage information.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | cloudposse/ecr/aws | v1.0.0 |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | cloudposse/ecr/aws | 1.0.1 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | cloudposse/label/null | ~> 0.25.0 |
 | <a name="module_github_role_label"></a> [github\_role\_label](#module\_github\_role\_label) | cloudposse/label/null | ~> 0.25.0 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
