@@ -7,7 +7,7 @@ module "ecr" {
   for_each = local.ecr_map
 
   source          = "cloudposse/ecr/aws"
-  version         = "1.0.1"
+  version         = "1.0.2"
   max_image_count = 50
   context         = module.ecr_label[each.key]
 
