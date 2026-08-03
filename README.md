@@ -20,7 +20,7 @@ Check our [Examples](examples) for full usage information.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.25.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.9.0 |
@@ -28,7 +28,7 @@ Check our [Examples](examples) for full usage information.
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws.production_environment_provider"></a> [aws.production\_environment\_provider](#provider\_aws.production\_environment\_provider) | ~> 6.25.0 |
 | <a name="provider_aws.test_environment_provider"></a> [aws.test\_environment\_provider](#provider\_aws.test\_environment\_provider) | ~> 6.25.0 |
 | <a name="provider_github"></a> [github](#provider\_github) | ~> 6.9.0 |
@@ -36,7 +36,7 @@ Check our [Examples](examples) for full usage information.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | cloudposse/ecr/aws | 1.0.1 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | cloudposse/label/null | ~> 0.25.0 |
 | <a name="module_github_role_label"></a> [github\_role\_label](#module\_github\_role\_label) | cloudposse/label/null | ~> 0.25.0 |
@@ -45,7 +45,7 @@ Check our [Examples](examples) for full usage information.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_role.github_ecr_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.github_ecr_test_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.github_production_environment_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -57,7 +57,7 @@ Check our [Examples](examples) for full usage information.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aws_account_ids_and_policies"></a> [aws\_account\_ids\_and\_policies](#input\_aws\_account\_ids\_and\_policies) | The AWS Account IDs to give access to with the given policy. | <pre>list(object({<br/>    account_id = string<br/>    policy_arn = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_create_default_repo_ruleset"></a> [create\_default\_repo\_ruleset](#input\_create\_default\_repo\_ruleset) | Set to true to create an opinionated default ruleset. | `bool` | `false` | no |
 | <a name="input_ecr_repos"></a> [ecr\_repos](#input\_ecr\_repos) | The set of ecr repos (i.e. service types) and namespaces (i.e. release/dev) to create. | <pre>list(object({<br/>    name                 = string<br/>    namespace            = optional(string, "")<br/>    image_tag_mutability = optional(string, "IMMUTABLE")<br/>    image_tag_mutability_exclusion_filter = optional(list(object({<br/>      filter      = string<br/>      filter_type = optional(string, "WILDCARD")<br/>    })), [])<br/>  }))</pre> | `[]` | no |
