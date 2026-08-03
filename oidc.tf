@@ -2,6 +2,16 @@
 // production
 /////////////////////////////////////////////////////////////
 
+locals {
+  // GitHub currently emits the ID-qualified subject format, while older tokens
+  // use the name-only format. Keep both during the transition so existing
+  // consumers and repositories with either token shape continue to work.
+  github_oidc_subjects = [
+    "repo:${var.organization}/${var.repo}:*",
+    "repo:${var.organization}@*/${var.repo}@*:*",
+  ]
+}
+
 data "aws_iam_openid_connect_provider" "github_oidc_production_environment_provider" {
   count    = length(var.aws_account_ids_and_policies) > 0 ? 1 : 0
   provider = aws.production_environment_provider
@@ -25,8 +35,11 @@ resource "aws_iam_role" "github_ecr_production_environment_provider" {
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${var.organization}/${var.repo}:*"
+            "token.actions.githubusercontent.com:sub" = local.github_oidc_subjects
           }
         }
       }
@@ -70,8 +83,11 @@ resource "aws_iam_role" "github_ecr_test_environment_provider" {
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${var.organization}/${var.repo}:*"
+            "token.actions.githubusercontent.com:sub" = local.github_oidc_subjects
           }
         }
       }
